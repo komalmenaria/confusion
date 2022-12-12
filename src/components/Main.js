@@ -4,22 +4,27 @@ import { DISHES } from '../shared/dishes'
 import Dishdetail from './Dishdetail';
 import Header from './Header';
 import Footer from './Footer';
+import Home from './Home';
+import { Switch,Route, Redirect } from 'react-router-dom';
 
 function Main() {
   const [dishes, setDishes] = useState(DISHES);
-  const [selectedDish, setSelectedDish] = useState(null);
-
-  function onDishSelect(dishID) {
-    setSelectedDish(dishID);
-  };
-
-
+  
+  const Homepage = ()=>{
+      return(<>
+      <Home />
+      </>)
+  }
 
   return (
+    
     <>
       <Header />
-      <Menu dishes={dishes} onClick={(dishID) => onDishSelect(dishID)} />
-      <Dishdetail dish={dishes.filter((dish) => dish.id === selectedDish)[0]} />
+     <Switch>
+      <Route path="/home" component={Homepage} />
+      <Route exact path="/menu" component={()=><Menu dishes={dishes} />} />
+      <Redirect to='/home'  />
+     </Switch>
       <Footer />
 
     </>
