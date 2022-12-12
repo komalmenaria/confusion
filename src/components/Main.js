@@ -22,13 +22,10 @@ function Main() {
       </div>
      </Navbar>
      <Menu dishes={dishes} onClick={(dishID) => onDishSelect(dishID)} />
-     <div className="container">
-      <div className="row">
+     
       <Dishdetail dish={dishes.filter((dish)=> dish.id === selectedDish)[0]} />
 
-      </div>
-
-     </div>
+      
     </>
      
    
