@@ -1,5 +1,6 @@
 import { React } from "react";
-import { Card, CardImg, CardBody, CardText, CardTitle } from "reactstrap";
+import { Card, CardImg, CardBody, CardText, CardTitle  , Breadcrumb , BreadcrumbItem } from "reactstrap";
+import { Link } from "react-router-dom";
 
 function RenderDish({dish}) {
   if (dish != null) {
@@ -22,13 +23,17 @@ function RenderDish({dish}) {
 }
 
 function RenderComments({comments}) {
-  if (comments != null) {
+  console.log(comments)
+
+
+  if (comments ) {
     return (
       <>
         <ul className="list-unstyled">
           <h4>Comments</h4>
 
-          {comments.map((comment) => {
+
+          {Array.isArray(comments) && comments.map((comment) => {
             return (
               <li key={comment.id}>
                 <p>{comment.comment}</p>
@@ -51,7 +56,8 @@ function RenderComments({comments}) {
   }
 }
 
-function  Dishdetail({dish})  {
+function  Dishdetail({dish ,comment})  {
+ 
   // componentDidMount(){
   //   console.log(" Dishdetail componentDidMount is invoked")
   // }
@@ -65,12 +71,22 @@ function  Dishdetail({dish})  {
     // console.log(" Dishdetail render is invoked")
         <>
           <div className="container">
+          <div className="row">
+                    <Breadcrumb>
+                        <BreadcrumbItem>  <Link to='/menu'>Menu</Link> </BreadcrumbItem>
+                        <BreadcrumbItem active> {dish.name} </BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>{dish.name}</h3>
+                        <hr />
+                    </div>
+                </div>
             <div className="row">
               <div className="row col-12 col-md-5 m-1">
                 <RenderDish dish={dish} />
               </div>
               <div className="row col-12 col-md-5 m-1">
-                <RenderComments  comments={dish.comments} />
+                <RenderComments  comments={comment} />
               </div>
             </div>
           </div>

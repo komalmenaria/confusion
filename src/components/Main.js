@@ -22,10 +22,16 @@ function Main() {
       return(<>
       <Home dish={dishes.filter((dish) => dish.featured)[0]}
       promotion={promotions.filter((promo) => promo.featured)[0]}
-      leader={leaders.filter((leader) => leader.featured)[0]}
-      
-      />
+      leader={leaders.filter((leader) => leader.featured)[0]} />
+
       </>)
+  }
+
+  const DishWithId = ({match})=>{
+    return(
+<Dishdetail dish={dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]} 
+comment={comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))} />
+    )
   }
 
   return (
@@ -35,6 +41,7 @@ function Main() {
      <Switch>
       <Route path="/home" component={Homepage} />
       <Route exact path="/menu" component={()=><Menu dishes={dishes} />} />
+      <Route  path="/menu/:dishId" component={DishWithId} />
       <Route exact path="/contactus" component={Contact} />
       <Redirect to='/home'  />
      </Switch>
