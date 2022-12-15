@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Menu from './Menu';
 import { DISHES } from '../shared/dishes'
 import { COMMENTS } from '../shared/comments'
 import { PROMOTIONS } from '../shared/promotions'
@@ -9,6 +8,9 @@ import Header from './Header';
 import Footer from './Footer';
 import Home from './Home';
 import Contact from './Contact';
+import About from './About';
+import Menu from './Menu';
+
 
 import { Switch,Route, Redirect } from 'react-router-dom';
 
@@ -41,6 +43,7 @@ comment={comments.filter((comment) => comment.dishId === parseInt(match.params.d
      <Switch>
       <Route path="/home" component={Homepage} />
       <Route exact path="/menu" component={()=><Menu dishes={dishes} />} />
+      <Route exact path="/aboutus" component={()=><About leaders={leaders} />} />
       <Route  path="/menu/:dishId" component={DishWithId} />
       <Route exact path="/contactus" component={Contact} />
       <Redirect to='/home'  />
